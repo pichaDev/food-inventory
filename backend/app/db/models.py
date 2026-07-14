@@ -21,6 +21,10 @@ class FoodItem(Base):
         nullable=False
     )
 
+    brand: Mapped[str | None] = mapped_column(
+    String(50)
+    )
+
     quantity: Mapped[float] = mapped_column(
         Float,
         nullable=False
