@@ -1,6 +1,6 @@
-from datetime import date
+from datetime import date, datetime
 
-from sqlalchemy import String, Float, Date, Text
+from sqlalchemy import String, Float, Date, Text, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
 
@@ -16,13 +16,26 @@ class FoodItem(Base):
         autoincrement=True
     )
 
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow,
+        nullable=False
+    )
+
     name: Mapped[str] = mapped_column(
         String(100),
         nullable=False
     )
 
     brand: Mapped[str | None] = mapped_column(
-    String(50)
+        String(50)
     )
 
     quantity: Mapped[float] = mapped_column(

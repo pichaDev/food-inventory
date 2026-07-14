@@ -1,10 +1,11 @@
-from datetime import date
+from datetime import date, datetime
 
 from pydantic import BaseModel
 
 
 class FoodItemCreate(BaseModel):
     name: str
+    brand: str | None = None
     quantity: float
     unit: str
     category: str | None = None
@@ -16,6 +17,8 @@ class FoodItemCreate(BaseModel):
 
 class FoodItemResponse(FoodItemCreate):
     id: int
+    created_at: datetime
+    updated_at: datetime
 
     class Config:
         from_attributes = True
@@ -23,6 +26,7 @@ class FoodItemResponse(FoodItemCreate):
 
 class FoodItemUpdate(BaseModel):
     name: str | None = None
+    brand: str | None = None
     quantity: float | None = None
     unit: str | None = None
     category: str | None = None
